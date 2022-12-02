@@ -1,10 +1,7 @@
-<header>
-    <div>
-        <img src="img/icone_discord.webp" alt="discord">
-        <h2>Nalith</h2>
-    </div>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+<header class="flex">
+
+    <div id="mySidenav" class="block h-0 w-full fixed z-{1} top-0 right-0 bg-black overflow-hidden duration-{0.5s} ">
+        <a href="" class="closebtn" onclick="closeNav()">&times;</a>
 
         <a href="#About"  class="underline " >About me</a>
         <a href="#Skills"  class="underline">Skills</a>
