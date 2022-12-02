@@ -6,6 +6,7 @@ function openNav() {
 document.querySelector('.menu-overlay').addEventListener('click', function(){
     closeNav()
 })
+
 function closeNav() {
     document.querySelector("#mySidenav").classList.remove("side-active");
     document.querySelector(".menu-overlay").classList.remove("menu-overlay-active");
