@@ -6,20 +6,19 @@ class Connection
 
   public function __construct()
   {
-    $this->pdo = new PDO("mysql:host=localhost;dbname=canard-stream", "root", "");
+    $this->pdo = new PDO("mysql:host=localhost;dbname=canard-streaming", "root", "");
   }
 
   public function insertU(User $user): bool
   {
-    $query = 'INSERT INTO user (email, password, first_name, last_name)
-              VALUES (:email, :password, :first_name, :last_name)';
+    $query = 'INSERT INTO user (email, password, pseudo)
+              VALUES (:email, :password, :pseudo)';
     $statement = $this->pdo->prepare($query);
 
     return $statement->execute([
       'email' => $user->email,
       'password' => md5($user->password . 'SALT'),
-      'first_name' => $user->firstname,
-      'last_name' => $user->lastname
+      'pseudo' => $user->firstname
     ]);
 
 

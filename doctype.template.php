@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="script.js"></script>
+
   <title>The Sin of Eden</title>
 </head>
 <body>
