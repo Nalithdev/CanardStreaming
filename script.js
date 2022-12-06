@@ -27,12 +27,13 @@ listMovPop.then(function (response) {
     }
 });
 
-
+var ActuGenre = '' ;
 // au click récupérer l'id du li et le console.log
 const lig = document.querySelectorAll('.li_genre');
 lig.forEach((item) => {
     item.addEventListener('click', () => {
         console.log(item.id);
+        var ActuGenre = item.id;
         let listMovGenre = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + item.id)
         console.log(listMovGenre)
         listMovGenre.then(function (response) {
@@ -48,3 +49,41 @@ lig.forEach((item) => {
         });
     })
 })
+
+var p = 1;
+document.querySelector('.li_page_n').innerHTML = p ;
+// au click changez de page
+const lip = document.querySelectorAll('.li_page');
+lip.forEach((item) => {
+    item.addEventListener('click', () => {
+        console.log(item.id);
+        console.log(' before if page n°' + p)
+
+        if (item.id === '1'){
+            p += 1
+        } else if ( item.id === '2' && p !== 1) {
+            p = p - 1
+        } else {
+            p = 1
+        }
+        console.log(' after if page n°' + p)
+        let listMovGenre = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=' + p)
+        console.log(listMovGenre)
+        listMovGenre.then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+            document.querySelector('.mov_area').innerHTML = '';
+            document.querySelector('.li_page_n').innerHTML = p ;
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            for (let i = 0; i < data.results.length; i++) {
+                let div = document.createElement('div')
+                div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                document.querySelector('.mov_area').appendChild(div)
+            }
+        });
+
+    })
+})
+
