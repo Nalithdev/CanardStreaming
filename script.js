@@ -12,9 +12,10 @@ function closeNav() {
     document.querySelector(".menu-overlay").classList.remove("menu-overlay-active");
 }
 
-// https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28
+// The area bellow is for all the script getting data from the api and displaying the film on the web site
 
-//movi pop
+
+//script display by default on the page (show pop movie)
 let listMovPop = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
 listMovPop.then(function (response) {
     return response.json();
@@ -26,14 +27,15 @@ listMovPop.then(function (response) {
         document.querySelector('.mov_area').appendChild(div)
     }
 });
-
-var ActuGenre = '' ;
-// au click récupérer l'id du li et le console.log
+var p = 1;
+var ActuGenre = 0 ;
+// script de la side bar pour afficher les genres
 const lig = document.querySelectorAll('.li_genre');
 lig.forEach((item) => {
     item.addEventListener('click', () => {
         console.log(item.id);
-        var ActuGenre = item.id;
+        ActuGenre = item.id;
+        p = 1
         let listMovGenre = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + item.id)
         console.log(listMovGenre)
         listMovGenre.then(function (response) {
@@ -41,6 +43,7 @@ lig.forEach((item) => {
         }).then(function (data) {
             console.log(data);
             document.querySelector('.mov_area').innerHTML = '';
+            console.log('Actugenre item id (script 2) : ' + ActuGenre)
             for (let i = 0; i < data.results.length; i++) {
                 let div = document.createElement('div')
                 div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
@@ -50,15 +53,17 @@ lig.forEach((item) => {
     })
 })
 
-var p = 1;
+
+
+
 document.querySelector('.li_page_n').innerHTML = p ;
-// au click changez de page
+// script to change page ( wanna die send help)
 const lip = document.querySelectorAll('.li_page');
 lip.forEach((item) => {
     item.addEventListener('click', () => {
         console.log(item.id);
+        console.log('Actugenre item id (script page) : ' + ActuGenre)
         console.log(' before if page n°' + p)
-
         if (item.id === '1'){
             p += 1
         } else if ( item.id === '2' && p !== 1) {
@@ -67,23 +72,58 @@ lip.forEach((item) => {
             p = 1
         }
         console.log(' after if page n°' + p)
-        let listMovGenre = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=' + p)
-        console.log(listMovGenre)
-        listMovGenre.then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            console.log(data);
-            document.querySelector('.mov_area').innerHTML = '';
-            document.querySelector('.li_page_n').innerHTML = p ;
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            for (let i = 0; i < data.results.length; i++) {
-                let div = document.createElement('div')
-                div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-                document.querySelector('.mov_area').appendChild(div)
-            }
-        });
+
+        if (ActuGenre != 0){
+            let listMovPage = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre + '&page=' + p)
+            console.log(listMovPage)
+            listMovPage.then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log(data);
+                document.querySelector('.mov_area').innerHTML = '';
+                document.querySelector('.li_page_n').innerHTML = p ;
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                for (let i = 0; i < data.results.length; i++) {
+                    let div = document.createElement('div')
+                    div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                    document.querySelector('.mov_area').appendChild(div)
+                }
+            });
+        } else {
+            let listMovPage = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=' + p)
+            console.log(listMovPage)
+            listMovPage.then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log(data);
+                document.querySelector('.mov_area').innerHTML = '';
+                document.querySelector('.li_page_n').innerHTML = p ;
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                for (let i = 0; i < data.results.length; i++) {
+                    let div = document.createElement('div')
+                    div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                    document.querySelector('.mov_area').appendChild(div)
+                }
+            });
+        }
+
+
+
+
 
     })
 })
+
+// debog my boy
+const b = document.querySelectorAll('body');
+b.forEach((item) => {
+    item.addEventListener('click', () => {
+        console.log('value of ' + p);
+        console.log('Actugenre item id (script body) : ' + ActuGenre)
+    })
+})
+
+
 
