@@ -44,8 +44,9 @@ require 'Header.template.php';
         </section>
 
         <ul>
-            <li class="li_page-" id="1" > << </li>
-            <li class="li_page+" id="2" > >> </li>
+            <li class="li_page" id="2" > << </li>
+            <li class="li_page_n"></li>
+            <li class="li_page" id="1" > >> </li>
         </ul>
 
     </main>
