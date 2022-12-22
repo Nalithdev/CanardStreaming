@@ -40,15 +40,17 @@ require 'Header.template.php';
 
         <section class="mov_area flex flex-wrap gap-[25px]">
         </section>
-</main>
-        <ul class="flex gap-4 justify-center text-white" >
-            <li class="li_page-" id="1" > << </li>
-            <li class="li_page+" id="2" > >> </li>
+
+
+        <ul class="text-white">
+            <li class="li_page" id="2" > << </li>
+            <li class="li_page_n"></li>
+            <li class="li_page" id="1" > >> </li>
         </ul>
 
 
 
-
+</main>
 
 <?php
 require 'footer.template.php';
