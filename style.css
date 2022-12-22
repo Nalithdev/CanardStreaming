@@ -1,8 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 * {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Prompt";
+  font-size: 18px;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 100px;
+}
+
+.user::-webkit-scrollbar {
+  width: 10px;
+}
+
+.user::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
 }
 
 .sidenav {
@@ -68,30 +95,12 @@
   height: 70vh;
 }
 
-@media only screen and (max-width: 800px) {
-  .Menu {
-    display: flex;
-    font-size: 30px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .Menu {
-    display: flex;
-    font-size: 20px;
-  }
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-}
-
 aside {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  align-items: center;
+  text-align: center;
 }
 
 aside ul {
@@ -100,36 +109,31 @@ aside ul {
 
 aside ul li {
   padding: 10px;
+  width: 35%;
 }
 
-.mov_area {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-div {
-  background-color: rgb(32, 32, 32);
+.mov_area div {
+  background-color: rgba(137, 137, 137, 0.3);
   color: rgb(231, 231, 231);
   width: 30vh;
-  height: auto;
+  border-radius: 5px;
 }
-
-.mov_area div p {
-  padding: 8px;
-  font-size: 18px;
-}
-
 .mov_area div h2 {
   padding: 15px;
+  font-size: 1.3rem;
+  font-family: "Vazirmatn";
+  height: 75px;
+  text-align: center;
 }
-
 .mov_area div img {
   width: 100%;
   height: auto;
+}
+.mov_area div p {
+  height: 20vh;
+  overflow-x: hidden;
+  padding: 8px;
+  font-size: 18px;
 }
 
 main ul {
@@ -144,4 +148,28 @@ main ul li {
   list-style: none;
 }
 
-/*# sourceMappingURL=Style.css.map */
+@media only screen and (max-width: 800px) {
+  .Menu {
+    display: flex;
+    font-size: 30px;
+  }
+}
+.profil_container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+}
+.profil_container .user {
+  position: fixed;
+  width: 30%;
+  padding: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .Menu {
+    display: flex;
+    font-size: 20px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
