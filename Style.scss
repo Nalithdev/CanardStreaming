@@ -123,6 +123,7 @@ aside ul li {
 
 
 .mov_area {
+
   div {
     background-color: rgba(137, 137, 137, 0.3);
     color: rgb(231, 231, 231);
@@ -154,6 +155,32 @@ aside ul li {
 }
 
 
+
+
+.mov_areas {
+
+  div {
+    background-color: rgba(137, 137, 137, 0.3);
+    color: rgb(231, 231, 231);
+    width: 30vh;
+    border-radius: 5px;
+
+    h2 {
+
+      font-size: 1.3rem;
+      font-family: "Vazirmatn";;
+      text-align: center;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+  }
+
+
+}
 main ul {
   display: flex;
   flex-direction: row;
@@ -165,8 +192,13 @@ main ul li {
   font-size: larger;
   list-style: none;
 }
-
-
+// MOVIE.PHP
+.add{
+  display: none;
+}
+.delete{
+  display: flex;
+}
 @media only screen and (max-width: 800px) {
 
   .Menu {
@@ -178,21 +210,7 @@ main ul li {
 }
 
 // PAGE MY_PROFILS
-.profil_container {
-  height: 100vh;
-  width: 100%;
-  display: flex;
 
-
-  .user {
-    position: fixed;
-    width: 30%;
-    padding: 1.5rem;
-
-
-
-  }
-}
 @media only screen and (max-width: 600px) {
 
   .Menu {

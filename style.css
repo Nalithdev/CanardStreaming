@@ -136,6 +136,22 @@ aside ul li {
   font-size: 18px;
 }
 
+.mov_areas div {
+  background-color: rgba(137, 137, 137, 0.3);
+  color: rgb(231, 231, 231);
+  width: 30vh;
+  border-radius: 5px;
+}
+.mov_areas div h2 {
+  font-size: 1.3rem;
+  font-family: "Vazirmatn";
+  text-align: center;
+}
+.mov_areas div img {
+  width: 100%;
+  height: auto;
+}
+
 main ul {
   display: flex;
   flex-direction: row;
@@ -148,23 +164,20 @@ main ul li {
   list-style: none;
 }
 
+.add {
+  display: none;
+}
+
+.delete {
+  display: flex;
+}
+
 @media only screen and (max-width: 800px) {
   .Menu {
     display: flex;
     font-size: 30px;
   }
 }
-.profil_container {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-}
-.profil_container .user {
-  position: fixed;
-  width: 30%;
-  padding: 1.5rem;
-}
-
 @media only screen and (max-width: 600px) {
   .Menu {
     display: flex;

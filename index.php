@@ -12,8 +12,8 @@ require 'doctype.template.php';
 require 'Header.template.php';
 
 ?>
-<main class="ml-[18%]">
-        <aside class="w-2/12 h-full bg-slate-900 text-white fixed left-0 overflow-y-scroll ">
+<main class="ml-[18%] pt-20 flex">
+        <aside class=" fixed w-1/6 h-full bg-slate-900 text-white left-0 overflow-y-scroll ">
         <ul class="block">
             <li class="li_genre" id="28">Action</li>
             <li class="li_genre" id="12">Adventure</li>
@@ -37,7 +37,7 @@ require 'Header.template.php';
         </ul>
     </aside>
 
-
+<div class="block">
         <section class="mov_area flex flex-wrap gap-[25px]">
         </section>
 
@@ -48,53 +48,10 @@ require 'Header.template.php';
             <li class="li_page" id="1" > >> </li>
         </ul>
 
-
+</div>
 
 </main>
 
 <?php
 require 'footer.template.php';
 ?>
-<script>
-
-    // GESTION API
-
-    // https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28
-
-    //movi pop
-
-    let listMovPop = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
-    console.log("bonjour")
-    listMovPop.then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        console.log(data);
-        for (let i = 0; i < data.results.length; i++) {
-            let div = document.createElement('div')
-            div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-            document.querySelector('.mov_area').appendChild(div)
-        }
-    });
-
-
-    // au click récupérer l'id du li et le console.log
-    const lig = document.querySelectorAll('.li_genre');
-    lig.forEach((item) => {
-        item.addEventListener('click', () => {
-            console.log(item.id);
-            let listMovGenre = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + item.id)
-            console.log(listMovGenre)
-            listMovGenre.then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                console.log(data);
-                document.querySelector('.mov_area').innerHTML = '';
-                for (let i = 0; i < data.results.length; i++) {
-                    let div = document.createElement('div')
-                    div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-                    document.querySelector('.mov_area').appendChild(div)
-                }
-            });
-        })
-    })
-</script>

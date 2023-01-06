@@ -10,6 +10,9 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-  <title>The Sin of Eden</title>
+
+        <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+
+  <title>Canard Streaming</title>
 </head>
 <body class="bg-slate-900">
