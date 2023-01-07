@@ -124,3 +124,13 @@ b.forEach((item) => {
         console.log('Actugenre item id (script body) : ' + ActuGenre)
     })
 })
+
+
+
+//get search_string
+document.querySelector('.search_bar').addEventListener('submit', (e) => {
+    e.preventDefault();
+    let search_string = document.querySelector('.search_bar input').value;
+    console.log(search_string);
+})
+

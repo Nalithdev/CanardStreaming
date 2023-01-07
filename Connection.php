@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Connection
 {
   private PDO $pdo;
@@ -11,8 +11,8 @@ class Connection
 
   public function insertU(User $user): bool
   {
-    $query = 'INSERT INTO user (email, password, pseudo)
-              VALUES (:email, :password, :pseudo)';
+    $query = 'INSERT INTO user (email,pseudo, password)
+              VALUES (:email, :pseudo, :password)';
     $statement = $this->pdo->prepare($query);
 
     return $statement->execute([
@@ -42,7 +42,47 @@ class Connection
     }
   }
 
+  public function creataalbum($album_name, $private)
+  {
+    $query = 'INSERT INTO album (album_name, private)
+    VALUES (:album_name, :private)';
+    $statement = $this->pdo->prepare($query);
+    if ($statement->execute([
+      'album_name' => $album_name,
+      'private' => $private
+    ])) {
+      echo 'Données enregistrées avec succès !';
+    } else {
+      echo "Erreur lors de l'enregistrement des données";
+    };
+    $album_id = $this->pdo->lastInsertId();
+    echo $album_id;
+    $query = 'INSERT INTO user_album (user_id, album_id)
+    VALUES (:user_id, :album_id)';
+    $statement = $this->pdo->prepare($query);
+    if ($statement->execute([
+      'user_id' => $_SESSION['user']['id'],
+      'album_id' => $album_id
+    ])) {
+      echo 'Données linker avec succès !';
+    } else {
+      echo "Erreur lors du linkage des données";
+    };
+  }
 
-
+  public function getmyalbum()
+  {
+    $query = 'SELECT album_name
+    FROM user_album AS ua
+    JOIN album AS a ON ua.album_id = a.album_id
+    JOIN `user` AS u ON u.id = ua.user_id
+    WHERE u.id = :user_id';
+    $statement = $this->pdo->prepare($query);
+    $statement->execute([
+      'user_id' => $_SESSION['user']['id']
+    ]);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
 
 }

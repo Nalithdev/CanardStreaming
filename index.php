@@ -37,7 +37,12 @@ require 'Header.template.php';
         </ul>
     </aside>
 
-
+        <section class="search_bar">
+            <form method="get">
+                <input type="text" id="search_string" name="search_string" value="search"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </section>
         <section class="mov_area flex flex-wrap gap-[25px]">
         </section>
 
