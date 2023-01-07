@@ -23,7 +23,7 @@ listMovPop.then(function (response) {
     console.log(data);
     for (let i = 0; i < data.results.length; i++) {
         let div = document.createElement('div')
-        div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+        div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
         document.querySelector('.mov_area').appendChild(div)
     }
 });
@@ -46,7 +46,7 @@ lig.forEach((item) => {
             console.log('Actugenre item id (script 2) : ' + ActuGenre)
             for (let i = 0; i < data.results.length; i++) {
                 let div = document.createElement('div')
-                div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
                 document.querySelector('.mov_area').appendChild(div)
             }
         });
@@ -86,7 +86,7 @@ lip.forEach((item) => {
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 for (let i = 0; i < data.results.length; i++) {
                     let div = document.createElement('div')
-                    div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                    div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
                     document.querySelector('.mov_area').appendChild(div)
                 }
             });
@@ -103,7 +103,7 @@ lip.forEach((item) => {
                 document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 for (let i = 0; i < data.results.length; i++) {
                     let div = document.createElement('div')
-                    div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                    div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
                     document.querySelector('.mov_area').appendChild(div)
                 }
             });
