@@ -29,7 +29,7 @@ require 'Header.template.php';
             <section class=" block xl:flex gap-5 items-center  see_area  m-auto xl:m-0 ">
 
             </section>
-            <a href="album.php?names=see"Voir Plus></a>
+            <a href="album.php?names=see">Voir Plus</a>
         </div>
 
 
@@ -46,14 +46,14 @@ require 'Header.template.php';
 
         <div class="pb-4  overscroll-y-hidden items-center flex flex-col" >
             <h2>Mes Albums</h2>
-            <section class=" xl:h-[280px] block xl:flex gap-5 wrap align-center  album_area  m-auto xl:m-0 " id="1">
+            <section class=" xl:h-[260px] block xl:flex gap-5 wrap align-center  album_area  m-auto xl:m-0 " id="1">
 
             </section>
             <button onclick="upheight(1)">Voir plus D'album</button>
         </div>
-        <div class="pb-4 xl:h-[280px] overscroll-y-hidden items-center flex flex-col" >
+        <div class="pb-4 overscroll-y-hidden items-center flex flex-col" >
             <h2>Album liker</h2>
-            <section class=" xl:h-[280px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
+            <section class=" xl:h-[260px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
             </section>
             <button onclick="upheight(1)">Voir plus D'album</button>
 
