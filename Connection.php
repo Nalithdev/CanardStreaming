@@ -177,12 +177,14 @@ class Connection
     }
 
     public function GAlbum($u_id){
+
         $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '"');
+
         $log->execute();
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
     public function GMovie($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 4');
+        $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 1');
         $log->execute();
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -194,4 +196,19 @@ class Connection
         $log->execute();
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getuser($u_id){
+        $log = $this->pdo->prepare('SELECT * FROM user WHERE id = "' . $u_id . '"');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+  /*  public function GAlbum($u_id , $private){
+        if ($private != ''){
+            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '"');
+        }else{
+            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '" AND private = '. $private.'');
+        }
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }*/
 }

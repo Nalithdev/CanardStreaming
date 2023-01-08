@@ -11,15 +11,19 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] === '') {
 require 'doctype.template.php';
 require 'Header.template.php';
 
-
+$id_user = $_GET['id'];
 ?>
 
     <div class="h-full block text-white w-full xl:flex">
     <div class="w-full h-auto xl:w-1/4 xl:h-screen xl:fixed flex flex-col text-center p-[1.5rem] bg-slate-800 pt-20">
         <iconify-icon icon="iconoir:profile-circled" class="justify-center flex text-[150px]"></iconify-icon>
         <?php
-        echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
-        echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
+        $query = new Connection();
+        $user = $query->getuser($id_user);
+        foreach ($user as $user) {
+            echo '<h1>' . $user['pseudo'] . ' ' . '</h1>';
+            echo '<h3>' . $user['email'] . ' ' . '</h3>';
+        }
         ?>
     </div>
         <div class="block pt-20 xl:ml-[25%]">
@@ -99,8 +103,9 @@ function getStr(mixed $movie, string $class): void
 
 function getMovieS(string $class): void
 {
+
     $query = new Connection();
-    $lastsee = $query->GMovieS($_SESSION['id']);
+    $lastsee = $query->GMovieS($_GET['id']);
 
     foreach ($lastsee as $movie) {
         getStr($movie, $class);
@@ -109,8 +114,9 @@ function getMovieS(string $class): void
 
 function getMovieD(string $class): void
 {
+
     $query = new Connection();
-    $lastsee = $query->GMovieD($_SESSION['id']);
+    $lastsee = $query->GMovieD($_GET['id']);
 
     foreach ($lastsee as $movie) {
         getStr($movie, $class);
@@ -154,11 +160,11 @@ getMovieD('.dream_area');
 function getAlbum(string $class): void
 {
     $query = new Connection();
-    $lastsee = $query->GAlbumid($_SESSION['id']);
+    $lastsee = $query->GAlbumid($_GET['id']);
     foreach ($lastsee as $albumid) {
         $album = $query->GAlbum($albumid['album_id']);
         foreach ($album as $Amovie) {
-            $movie = $query->GMovie($Amovie['album_id']);
+            $movie = $query->GMovie($Amovie['album_id'],0);
             foreach ($movie as $mov) {
                 Writealbum($mov, $class , $Amovie['album_id'] , $Amovie['album_name']);
             }
@@ -171,7 +177,7 @@ getAlbum('.album_area');
 function getAlbumL(string $class): void
 {
     $query = new Connection();
-    $lastsee = $query->GAlbumLid($_SESSION['id']);
+    $lastsee = $query->GAlbumLid($_GET['id']);
     foreach ($lastsee as $albumid) {
         $album = $query->GAlbum($albumid['album_id']);
         foreach ($album as $Amovie) {
