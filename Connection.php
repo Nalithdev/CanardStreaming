@@ -106,36 +106,29 @@ class Connection
     if ($statement->execute([
       'album_name' => $album_name,
       'private' => $private
-    ])) {
-      echo 'Données enregistrées avec succès !';
-    } else {
-      echo "Erreur lors de l'enregistrement des données";
-    };
+    ]));
     $album_id = $this->pdo->lastInsertId();
-    echo $album_id;
+    //echo $album_id;
     $query = 'INSERT INTO album_by (user_id, album_id)
     VALUES (:user_id, :album_id)';
     $statement = $this->pdo->prepare($query);
     if ($statement->execute([
       'user_id' => $_SESSION['user']['id'],
       'album_id' => $album_id
-    ])) {
-      echo 'Données linker avec succès !';
-    } else {
-      echo "Erreur lors du linkage des données";
-    };
+    ]));
   }
   public function getmyalbum()
   {
-    $query = 'SELECT album_id
-    FROM album_by 
-    WHERE album_id = :album_id';
+    $query = 'SELECT a.album_name, a.album_id 
+    FROM album_by AS ab
+    JOIN album AS a ON a.album_id = ab.album_id
+    WHERE ab.user_id = :SUID';
     $statement = $this->pdo->prepare($query);
     $statement->execute([
-      'album_id
-      ' => $_SESSION['user']['id']
+      'SUID' => $_SESSION['user']['id']
     ]);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($result);
     return $result;
   }
   public function getalbumcontent($album_id)
@@ -151,30 +144,21 @@ class Connection
     return $result;
   }
 
-  public function addfilmtoalbum($album_name, $film_id){
-    $query = 'INSERT INTO album_movie
-    (album_name, album_movie ) VALUES (:album_name, :album_movie);
-    WHERE album_id = :album_name';
+  public function addfilmtoalbum($album_id, $movie_id){
+    $query ='INSERT INTO album_movie (album_id, movie_id)
+    VALUES (:album_id, :movie_id)';
     $statement = $this->pdo->prepare($query);
     if ($statement->execute([
-      'album_name' => $album_name,
-      'film_id' => $film_id
-    ])) {
-      echo 'Données enregistrées avec succès !';
-    } else {
-      echo "Erreur lors de l'enregistrement des données";
-    };
+      'album_id' => $album_id,
+      'movie_id' => $movie_id
+    ]));
   }
 
   public function getmovibyID($film_id){
     $query = 'SE';
     $statement = $this->pdo->prepare($query);
     if ($statement->execute([
-    ])) {
-      echo 'Données enregistrées avec succès !';
-    } else {
-      echo "Erreur lors de l'enregistrement des données";
-    };
+    ]));
   }
 
     public function selectWhereUserIdWithLimit($field, $table_name, $user_id, $limit)

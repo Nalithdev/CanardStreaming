@@ -30,9 +30,8 @@ console.log(film) </script>"
                     <h2>A quel album ajouter le film : </h2>
                 <form method="POST" >
                 <?php
-                /*
-                                    $connection = new connection();
-                                    A corriger
+               $connection = new connection();
+
                                   $Myalbums = $connection->getmyalbum();
 
                                   foreach($Myalbums as $Myalbum){
@@ -43,24 +42,21 @@ console.log(film) </script>"
                                   }
 
                                    ?>
-                                   <br>
-                                   <input class=" bg-slate-700 p-2 pl-4 pr-4 rounded-full" type="submit" value="Ajouter">
-                               </form>
 
-                                   <?php
-                                   $checkboxes = isset($_POST['checkbox']) ? $_POST['checkbox'] : array();
-                                   foreach ($checkboxes as $checkbox) {
-                                       // Traitement des valeurs cochées
-                                       $connection = new connection();
-                                       $connection->addfilmtoalbum($checkbox , $_GET['ids']);
 
-                                   }*/
-                    ?>
-                </div>
+                    <br>
+                    <input class=" bg-slate-700 p-2 pl-4 pr-4 rounded-full" type="submit" value="Ajouter">
+                </form>
             </section>
-
-
-            <?php
+            <?php 
+                $checkboxes = isset($_POST['checkbox']) ? $_POST['checkbox'] : array();
+                foreach ($checkboxes as $checkbox) {
+                    // Traitement des valeurs cochées
+                    $connection = new connection();
+                    $connection->addfilmtoalbum($checkbox, $_GET['ids']);
+                }
+                    ?>
+    <?php
             //liste souhait
             $query = new Connection();
             $result = $query -> SfD($_GET['ids'] , $_SESSION['id']);
@@ -173,4 +169,3 @@ if ($_POST){
     }
 }
 ?>
-
