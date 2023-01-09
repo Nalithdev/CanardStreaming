@@ -19,22 +19,88 @@ function upheight(id){
 
 }
 // The area bellow is for all the script getting data from the api and displaying the film on the web site
+var p = 1; //setting page number to 1
+var ActuGenre = 28 ; //setting genre action
+var CurentFetch = 0; //setting curent fetch to none
+var CurentFilter = 0; //setting curent filter to none
+var IsAdulte = false; //setting adult filter to false
+let orderby = document.querySelector('#orderby');
+// orderby.addEventListener('change', () => {
+// console.log(orderby.value);
+// });
 
 
 //script display by default on the page (show pop movie)
-let listMovPop = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
-listMovPop.then(function (response) {
+let listMovFilter = 'https:/'+'/api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre 
+CurentFetch = listMovFilter
+listMovFilter = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre)
+listMovFilter.then(function (response) {
     return response.json();
-}).then(function (data) {
-    console.log(data);
+    }).then(function (data) {
+    //console.log(data);
+    document.querySelector('.mov_area').innerHTML = '';
+    document.querySelector('.li_page_n').innerHTML = p ;
+    console.log('cas 3')
     for (let i = 0; i < data.results.length; i++) {
         let div = document.createElement('div')
-        div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
+        div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
         document.querySelector('.mov_area').appendChild(div)
     }
 });
-var p = 1;
-var ActuGenre = 0 ;
+// var p = 1;
+// var ActuGenre = 0 ;
+
+//Axolote de l'utilisateur
+let SearchInputuser = document.querySelector('#searchuser');
+SearchInputuser.addEventListener('keyup', () => {
+    
+});
+
+
+
+
+
+
+
+
+//Axolote AKA the search bar with axios
+let SearchInput = document.querySelector('#search');
+SearchInput.addEventListener('keyup', () => {
+    //console.log(SearchInput.value);
+    if (SearchInput.value.length == 0) {
+        //axios.get('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
+        axios.get('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28')
+        .then(response => {
+        //console.log(response.data);
+        p = 1
+        ActuGenre = 28
+        document.querySelector('.mov_area').innerHTML = '';
+        document.querySelector('.li_page_n').innerHTML = p ;
+        for (let i = 0; i < response.data.results.length; i++) {
+            let div = document.createElement('div')
+            div.innerHTML = `<h2>${response.data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${response.data.results[i].poster_path}"><p>${response.data.results[i].overview}</p>`
+            document.querySelector('.mov_area').appendChild(div)
+        }
+        });
+    } else {
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=512f0783bae246658f714cd1abc41513&language=en-US&query=' + SearchInput.value + '&page=1&include_adult=false')
+        .then(response => {
+            //console.log(response.data);
+            p = 1
+            document.querySelector('.mov_area').innerHTML = '';
+            document.querySelector('.li_page_n').innerHTML = p ;
+            for (let i = 0; i < response.data.results.length; i++) {
+                let div = document.createElement('div')
+                div.innerHTML = `<h2>${response.data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${response.data.results[i].poster_path}"><p>${response.data.results[i].overview}</p>`
+                document.querySelector('.mov_area').appendChild(div)
+            }
+        })
+        .catch(error => {
+            console.log(error + 'not axolote');
+        });
+    }
+});
+
 // script de la side bar pour afficher les genres
 const lig = document.querySelectorAll('.li_genre');
 lig.forEach((item) => {
@@ -119,15 +185,6 @@ lip.forEach((item) => {
 
 
 
-    })
-})
-
-// debog my boy
-const b = document.querySelectorAll('body');
-b.forEach((item) => {
-    item.addEventListener('click', () => {
-        console.log('value of ' + p);
-        console.log('Actugenre item id (script body) : ' + ActuGenre)
     })
 })
 

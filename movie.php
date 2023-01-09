@@ -7,7 +7,7 @@ session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user'] === ''){
     header('Location: login.php');
 }
-
+$_GET['ids'] = 555604 ;
 require 'doctype.template.php';
 require 'Header.template.php';
 
@@ -21,10 +21,41 @@ console.log(film) </script>"
 
 
         <div class="flex flex-col justify-around items-center  w-11/12">
+
             <?php
-            echo'
-            
-            <p class="bg-slate-700 p-2 pl-4 pr-4 rounded-full">Ajouter à un album </p>';
+            echo'<p class="addalbum bg-slate-700 p-2 pl-4 pr-4 rounded-full">Ajouter à un album </p>';
+            ?>
+            <section class="pop-up hidden">
+                <div id="overlay"></div>
+                <div class="bg-white text-black z-50 absolute top-96 left-96 w-52 h-48">
+                    <h2>A quel album ajouter le film : </h2>
+                <form method="POST" >
+                <?php
+                        $connection = new connection();
+                        $Myalbums = $connection->getmyalbum();
+                        foreach($Myalbums as $Myalbum){
+                            echo '<br>';
+                            echo '<label for="'. $Myalbum['album_name'] .'"> Ajouter a '. $Myalbum['album_name'] .'</label>';
+                            echo '<input type="checkbox" id="'. $Myalbum['album_name'] .'" name="checkbox[]" value="'. $Myalbum['album_name'] .'">';
+                            
+                        }
+                    ?>
+                    <br>
+                    <input class=" bg-slate-700 p-2 pl-4 pr-4 rounded-full" type="submit" value="Ajouter">
+                </form>
+            </section>
+            <?php 
+                $checkboxes = isset($_POST['checkbox']) ? $_POST['checkbox'] : array();
+                foreach ($checkboxes as $checkbox) {
+                    // Traitement des valeurs cochées
+                    $connection = new connection();
+                    $connection->addfilmtoalbum($checkbox , $_GET['ids']);
+
+                }
+            ?>
+
+            <?php
+            //liste souhait
             $query = new Connection();
             $result = $query -> SfD($_GET['ids'] , $_SESSION['id']);
             if($result){
@@ -40,6 +71,9 @@ console.log(film) </script>"
                 <input type="submit" value="Mettre dans la liste de souhait" name="dream" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full" >
             </form>';
             };
+
+
+            //liste vue
             $query = new Connection();
             $result = $query -> SfS($_GET['ids'] , $_SESSION['id']);
             if($result){
@@ -90,6 +124,15 @@ console.log(film) </script>"
         }
     });
 
+    //auclick sur la classe addalbum 
+    let addalbum = document.querySelector('.addalbum')
+    addalbum.addEventListener('click', function () {
+        document.querySelector('.pop-up').classList.remove('hidden')
+    }) 
+    let overlay = document.querySelector('#overlay')
+    overlay.addEventListener('click', function () {
+        document.querySelector('.pop-up').classList.add('hidden')
+    })
 </script>
 
 <?php

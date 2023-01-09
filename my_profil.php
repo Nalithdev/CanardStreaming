@@ -7,6 +7,7 @@ session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user'] === '') {
     header('Location: login.php');
 }
+// session_destroy();
 
 require 'doctype.template.php';
 require 'Header.template.php';
@@ -20,9 +21,37 @@ require 'Header.template.php';
         <?php
         echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
         echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
+        echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
         ?>
+    </div> 
+    <div class="block w-[70%]'">
     </div>
         <div class="block pt-20 xl:ml-[25%]">
+
+        <div class="pb-[20px] items-center flex flex-col w-full ">
+            <form method="GET">
+                <label for="searchuser">Find a Friend :</label>
+                <input class="text-black" type="text" id="searchuser" placeholder="Search a user" name="user" >
+
+                <input type="submit" value="Look for" name="search">
+            </form>
+            <?php
+            if ($_GET){
+                $connection = new Connection();
+                $results = $connection->searchuser($_GET['user']);
+                if($results){
+                    echo '<h2>Resultat de la recherche : </h2>';
+                    foreach($results as $user){
+                        echo '<a href="profil.php?id='. $user['id'] .'">'. $user['pseudo'] .'</a>';
+                    }
+                }else{
+                    echo '<h2>Resultat de la recherche : </h2>';
+                    echo '<h3> Aucun resultat </h3>';
+                }
+            };
+            ?>
+        </div>
+        
 
         <div class="pb-[20px] items-center flex flex-col w-full ">
             <h2>Dernier Visionnage</h2>
@@ -51,6 +80,7 @@ require 'Header.template.php';
             </section>
             <button onclick="upheight(1)">Voir plus D'album</button>
         </div>
+            
         <div class="pb-4 overscroll-y-hidden items-center flex flex-col" >
             <h2>Album liker</h2>
             <section class=" xl:h-[26   0px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
@@ -58,9 +88,46 @@ require 'Header.template.php';
             <button onclick="upheight(1)">Voir plus D'album</button>
 
         </div>
+        <div>
+            <button class="btform bg-slate-600"->Crée un album</button>
+        </div>
 
     </div>
 </div>
+<section class="pop-up hidden">
+    <div id="overlay"></div>
+    <form method="POST" class="bg-white z-50 absolute top-96 left-96 w-52 h-48">
+        <label for="album_name">Nom: </label>
+        <input type="text" name="album_name" id="album_name" placeholder="nom album">
+
+        <label for="private">Type</label><br>
+        <input type="radio" id="public" name="private" value="0">Public
+        <input type="radio" id="prive" name="private" value="1">Priver
+        <br>
+
+        
+        <button class=" bg-neutral-300" type="submit">Crée</button>
+    </form>
+</section>
+
+<?php 
+    if ($_POST){
+    $connection = new Connection();
+    $connection->creataalbum($_POST['album_name'], $_POST['private']);
+    }
+?>
+
+<script>
+    let CreeAlbum = document.querySelector('.btform')
+    CreeAlbum.addEventListener('click', function () {
+        document.querySelector('.pop-up').classList.remove('hidden')
+    })      
+    let overlay = document.querySelector('#overlay')
+    overlay.addEventListener('click', function () {
+        document.querySelector('.pop-up').classList.add('hidden')
+    })
+
+</script>
     <script src="script.js"></script>
 
 <?php
