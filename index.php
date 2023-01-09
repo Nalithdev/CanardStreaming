@@ -42,6 +42,10 @@ require 'Header.template.php';
 
 <div class="block pt-20 xl:pt-0">
     <div class="flex text-white justify-evenly p-[15px]">
+        <div>
+            <input type="checkbox" id="pegi" name="pegi" value="pegi" checked>
+            <label for="pegi">SafeSearch</label>
+        </div>
         <div class="text-black   search ">
             <input type="text" id="search" placeholder="Search" >
         </div>

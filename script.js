@@ -29,11 +29,22 @@ let orderby = document.querySelector('#orderby');
 // console.log(orderby.value);
 // });
 
+//verifier si l'input type checkbox est coché
+let pegi = document.querySelector('#pegi');
+window.addEventListener('click', () => {
+    if (pegi.checked) {
+        IsAdulte = '&include_adult=false'
+        console.log(IsAdulte);
+    } else {
+        IsAdulte = '&include_adult=true'
+        console.log(IsAdulte);
+    }
+});
 
 //script display by default on the page (show pop movie)
-let listMovFilter = 'https:/'+'/api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre 
+let listMovFilter = 'https:/'+'/api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre + IsAdulte
 CurentFetch = listMovFilter
-listMovFilter = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre)
+listMovFilter = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre + IsAdulte)
 listMovFilter.then(function (response) {
     return response.json();
     }).then(function (data) {
@@ -57,7 +68,7 @@ SearchInput.addEventListener('keyup', () => {
     console.log("bonjour")
     if (SearchInput.value.length == 0) {
         //axios.get('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
-        axios.get('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28')
+        axios.get('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28'+ IsAdulte)
         .then(response => {
         console.log(response.data);
         p = 1
@@ -71,7 +82,7 @@ SearchInput.addEventListener('keyup', () => {
         }
         });
     } else {
-        axios.get('https://api.themoviedb.org/3/search/movie?api_key=512f0783bae246658f714cd1abc41513&language=en-US&query=' + SearchInput.value + '&page=1&include_adult=false')
+        axios.get('https://api.themoviedb.org/3/search/movie?api_key=512f0783bae246658f714cd1abc41513&language=en-US&query=' + SearchInput.value + '&page=1' + IsAdulte)
         .then(response => {
             //console.log(response.data);
             p = 1
@@ -96,7 +107,7 @@ lig.forEach((item) => {
         console.log(item.id);
         ActuGenre = item.id;
         p = 1
-        let listMovGenre = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + item.id)
+        let listMovGenre = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + item.id + IsAdulte)
         console.log(listMovGenre)
         listMovGenre.then(function (response) {
             return response.json();
@@ -134,7 +145,7 @@ lip.forEach((item) => {
         console.log(' after if page n°' + p)
 
         if (ActuGenre != 0){
-            let listMovPage = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre + '&page=' + p)
+            let listMovPage = fetch('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=' + ActuGenre + '&page=' + p + IsAdulte)
             console.log(listMovPage)
             listMovPage.then(function (response) {
                 return response.json();
@@ -151,7 +162,7 @@ lip.forEach((item) => {
                 }
             });
         } else {
-            let listMovPage = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=' + p)
+            let listMovPage = fetch('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=' + p + + IsAdulte)
             console.log(listMovPage)
             listMovPage.then(function (response) {
                 return response.json();
