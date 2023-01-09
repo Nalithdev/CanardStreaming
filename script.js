@@ -43,19 +43,18 @@ listMovFilter.then(function (response) {
     console.log('cas 3')
     for (let i = 0; i < data.results.length; i++) {
         let div = document.createElement('div')
-        div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+        div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p></div></a>`
         document.querySelector('.mov_area').appendChild(div)
     }
 });
 // var p = 1;
 // var ActuGenre = 0 ;
 
-
-
 //Axolote AKA the search bar with axios
 let SearchInput = document.querySelector('#search');
 SearchInput.addEventListener('keyup', () => {
     console.log(SearchInput.value);
+    console.log("bonjour")
     if (SearchInput.value.length == 0) {
         //axios.get('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
         axios.get('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28')
@@ -80,7 +79,7 @@ SearchInput.addEventListener('keyup', () => {
             document.querySelector('.li_page_n').innerHTML = p ;
             for (let i = 0; i < response.data.results.length; i++) {
                 let div = document.createElement('div')
-                div.innerHTML = `<h2>${response.data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${response.data.results[i].poster_path}"><p>${response.data.results[i].overview}</p>`
+                div.innerHTML = `<a href="movie.php?ids=${data.results[i].id}"><div><h2>${response.data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${response.data.results[i].poster_path}"><p>${response.data.results[i].overview}</p></div></a>`
                 document.querySelector('.mov_area').appendChild(div)
             }
         })
@@ -169,11 +168,6 @@ lip.forEach((item) => {
                 }
             });
         }
-
-
-
-
-
     })
 })
 

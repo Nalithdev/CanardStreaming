@@ -23,6 +23,9 @@ require 'Header.template.php';
         echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
         echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
         ?>
+        <div>
+            <button class="btform bg-slate-600"->Crée un album</button>
+        </div>
     </div> 
     <div class="block w-[70%]'">
     </div>
@@ -88,21 +91,19 @@ require 'Header.template.php';
             <button onclick="upheight(1)">Voir plus D'album</button>
 
         </div>
-        <div>
-            <button class="btform bg-slate-600"->Crée un album</button>
-        </div>
+
 
     </div>
 </div>
 <section class="pop-up hidden">
     <div id="overlay"></div>
-    <form method="POST" class="bg-white z-50 absolute top-96 left-96 w-52 h-48">
+    <form method="POST" class="bg-gray-400 z-50 fixed left-[47.5%] top-[25%] w-auto h-auto p-10 flex flex-col">
         <label for="album_name">Nom: </label>
         <input type="text" name="album_name" id="album_name" placeholder="nom album">
 
-        <label for="private">Type</label><br>
-        <input type="radio" id="public" name="private" value="0">Public
-        <input type="radio" id="prive" name="private" value="1">Priver
+        <label for="private">Type</label>
+        <p>Public<input type="radio" id="public" name="private" value="0"></p>
+        <p>Priver<input type="radio" id="prive" name="private" value="1"></p>
         <br>
 
         

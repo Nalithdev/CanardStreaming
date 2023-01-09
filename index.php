@@ -12,11 +12,8 @@ require 'doctype.template.php';
 require 'Header.template.php';
 
 ?>
-<main class="ml-[18%] pt-20 flex">
-
-
-        <aside class=" fixed w-1/6 h-full bg-slate-900 text-white left-0 overflow-y-scroll ">
-        <ul class="block">
+    <aside class="fixed xl:w-1/6 xl:h-full bg-slate-900 text-white pt-20  md:top-0 xl:left-0 xl:overflow-y-scroll overflow-x-scroll xl:overflow-x-hidden w-full h-auto ">
+        <ul class="xl:block xl:h-full flex pl-[550px] xl:pl-0 ">
             <li class="li_genre" id="28">Action</li>
             <li class="li_genre" id="12">Adventure</li>
             <li class="li_genre" id="16">Animation</li>
@@ -39,14 +36,19 @@ require 'Header.template.php';
         </ul>
     </aside>
 
-<div class="block">
-    <div class="flex text-white">
+<main class="xl:ml-[18%]   pt-20 flex">
+
+
+
+<div class="block pt-20 xl:pt-0">
+    <div class="flex text-white justify-evenly p-[15px]">
         <div class="text-black   search ">
             <input type="text" id="search" placeholder="Search" >
         </div>
 
-        <div>
-            <p>Order by</p>
+        <div class="flex gap-1">
+            <p> Order by</p>
+
             <select class="MainFilter text-black" name="orderby" id="orderby">
                 <option value="none">Rien</option>
                 <option value="popularity.desc">Popularity desc</option>
@@ -58,6 +60,7 @@ require 'Header.template.php';
             </select>
             <button class="ValidateFilter">Filter</button>
         </div>
+
     </div>
         <section class="mov_area flex flex-wrap gap-[25px]">
         </section>

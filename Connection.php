@@ -27,13 +27,12 @@ class Connection
 
 
 
-  public function loginuser($email, $password): bool|array
+  public function loginuser($email, $password)
   {
     $log = $this->pdo->prepare('SELECT * FROM user WHERE email ="' . $email . '"');
     $log->execute();
 
     $result = $log->fetchAll(PDO::FETCH_ASSOC)[0];
-
     if (md5($password . 'SALT') === $result['password']) {
 
       return $result;
@@ -153,9 +152,9 @@ class Connection
   }
 
   public function addfilmtoalbum($album_name, $film_id){
-    $query = 'UPDATE album
-    SET album_content = CONCAT(album_content,  " " ,:film_id)
-    WHERE album_name = :album_name';
+    $query = 'INSERT INTO album_movie
+    (album_name, album_movie ) VALUES (:album_name, :album_movie);
+    WHERE album_id = :album_name';
     $statement = $this->pdo->prepare($query);
     if ($statement->execute([
       'album_name' => $album_name,
@@ -227,7 +226,7 @@ class Connection
     public function GMovie($u_id){
         $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 1');
         $log->execute();
-        print_r($log);
+
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
     public function GAlbumLid($u_id){

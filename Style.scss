@@ -29,6 +29,9 @@
 body::-webkit-scrollbar {
   width: 10px;
 }
+aside::-webkit-scrollbar {
+  height: 5px;
+}
 
 .sidenav {
   display: initial;
