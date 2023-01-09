@@ -50,16 +50,6 @@ listMovFilter.then(function (response) {
 // var p = 1;
 // var ActuGenre = 0 ;
 
-//Axolote de l'utilisateur
-let SearchInputuser = document.querySelector('#searchuser');
-SearchInputuser.addEventListener('keyup', () => {
-    
-});
-
-
-
-
-
 
 
 
@@ -180,11 +170,6 @@ lip.forEach((item) => {
                 }
             });
         }
-
-
-
-
-
     })
 })
 
