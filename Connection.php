@@ -114,7 +114,7 @@ class Connection
     };
     $album_id = $this->pdo->lastInsertId();
     echo $album_id;
-    $query = 'INSERT INTO user_album (user_id, album_id)
+    $query = 'INSERT INTO album_by (user_id, album_id)
     VALUES (:user_id, :album_id)';
     $statement = $this->pdo->prepare($query);
     if ($statement->execute([
@@ -128,26 +128,24 @@ class Connection
   }
   public function getmyalbum()
   {
-    $query = 'SELECT album_name
-    FROM user_album AS ua
-    JOIN album AS a ON ua.album_id = a.album_id
-    JOIN `user` AS u ON u.id = ua.user_id
-    WHERE u.id = :user_id';
+    $query = 'SELECT album_id
+    FROM album_by 
+    WHERE album_id = :album_id';
     $statement = $this->pdo->prepare($query);
     $statement->execute([
-      'user_id' => $_SESSION['user']['id']
+      'album_id' => $_SESSION['user']['id']
     ]);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-  public function getalbumcontent($album_name)
+  public function getalbumcontent($album_id)
   {
-    $query = 'SELECT album_content
-    FROM album 
-    WHERE album_name = :album_name';
+    $query = 'SELECT album_movie
+    FROM album_movie
+    WHERE album_name = :album_id';
     $statement = $this->pdo->prepare($query);
     $statement->execute([
-      'album_name' => $album_name
+      'album_id' => $album_id
     ]);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;

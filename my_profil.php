@@ -7,6 +7,7 @@ session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user'] === '') {
     header('Location: login.php');
 }
+// session_destroy();
 
 require 'doctype.template.php';
 require 'Header.template.php';
@@ -23,7 +24,7 @@ require 'Header.template.php';
         echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
         ?>
     </div> -->
-    <div class="block w-[70%] ml-[30%]">
+    <div class="block w-[70%]'">
     </div>
         <div class="block pt-20 xl:ml-[25%]">
 
@@ -49,122 +50,12 @@ require 'Header.template.php';
 
         <div class="pb-4  overscroll-y-hidden items-center flex flex-col" >
             <h2>Mes Albums</h2>
-            <?php
-
-            $connection = new connection();
-            $Myalbums = $connection->getmyalbum();
-            echo '<ul>';
-            echo '<script> var a = 0; var Myalbumcontent = 0;</script>';
-            foreach($Myalbums as $Myalbum){
-                echo '<br>';
-                echo '<h3 class=" ' . $Myalbum['album_name'] . ' ">' . $Myalbum['album_name'] . '</h3>';
-                $connection = new connection();
-                $Myalbumcontents = $connection->getalbumcontent($Myalbum['album_name']);
-                
-                foreach($Myalbumcontents as $Myalbumcontent){
-                    echo '<br>';
-                    echo '<h3>' . $Myalbumcontent['album_content'] . '</h3>';
-                    $a = $Myalbumcontent['album_content'];
-                    echo '<script> console.log("' . $a . '") 
-                    a = ' . $a . '
-                    </script>';
-                    ?><script> 
-                    console.log(a);
-                    Myalbumcontent = fetch('https://api.themoviedb.org/3/movie/' + a + '?api_key=512f0783bae246658f714cd1abc41513&language=en-US')
-                    Myalbumcontent.then(function (response) {
-                        return response.json();
-                        }).then(function (data) {
-                        console.log(data);
-                        // document.querySelector('.mov_area').innerHTML = '';
-                        // document.querySelector('.li_page_n').innerHTML = p ;
-                        // console.log('cas 3')
-                        // for (let i = 0; i < data.results.length; i++) {
-                        //     let div = document.createElement('div')
-                        //     div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-                        //     document.querySelector('.mov_area').appendChild(div)
-                        // }
-                    });
-                    </script>
-                    <?php
-                    echo '<br>'
-                    
-                    ?>
-                    <!-- <script>
-                        a = "' . $a . '";
-                    console.log(a);
-                    console.log(typeof a);
-                    
-                    console.log(String(a).chartAt(0));
-                    b= a.split(',');
-                    console.log(b);
-                    console.log(typeof b);
-                        c = b.charAt(0);
-                    console.log(c);
-                    if (b.charAt(0) = ",") {
-                        c = b.slice(1);
-                        console.log(c);
-                    };
-                        if ("' . $a . '".startsWith(',') ) {
-                        a = "' . $a . '".slice(1);
-                        console.log(a);
-                        console.log("prout");
-                    } else {
-                        console.log("prout2");
-                    };
-                        if ("' . $a . '".startsWith(',') ) {
-                        a = "' . $a . '".slice(1);
-                        b= a.split(',');
-                        c= a.map(x => x.trim());
-                        console.log(c);
-                        d= a.map(x => parseInt(x.trim()));
-                        console.log(d);
-                        console.log("prout");
-                    } else {
-                        b= "' . $a . '".split(',');
-                        c= a.map(x => x.trim());
-                        console.log(c);
-                        d= a.map(x => parseInt(x.trim()));
-                        console.log(d);
-                    };
-                        const str = $a ;
-
-                        // Utiliser la méthode split() pour séparer la chaîne en un tableau en utilisant la virgule comme séparateur
-                        const arr = str.split(',');
-
-                        // Utiliser la méthode map() pour appliquer une fonction à chaque élément du tableau et renvoyer un nouveau tableau
-                        const numArr = arr.map(x => x.trim());
-
-                        console.log(numArr); // ['85124', '156984', '556']
-                    </script> -->
-                    
-                    <?php
-                }
-                echo '<br>';
-            }
-            echo '</ul>';
-            ?>
-        </div>
-        <!-- <section class="album-pop-up hidden">
-            <div id="overlay"></div> -->
-        <!-- <section class="album-pop-up">
-            <?php
-            // $connection = new connection();
-            // $Myalbumcontents = $connection->getalbumcontent($Myalbum['album_name']);
-            // foreach($Myalbumcontents as $Myalbumcontent){
-            //     echo '<br>';
-            //     echo '<h3>' . $Myalbumcontent['album_content'] . '</h3>';
-            //     echo '<br>';
-            // }
-            ?>
-        </section> -->
-        <div class="pb-4">
-            <h2>Album liker</h2>
-            <!-- <section class="flex flex-wrap gap-[25px]  wrap"> -->
             <section class=" xl:h-[260px] block xl:flex gap-5 wrap align-center  album_area  m-auto xl:m-0 " id="1">
 
             </section>
             <button onclick="upheight(1)">Voir plus D'album</button>
         </div>
+            
         <div class="pb-4 overscroll-y-hidden items-center flex flex-col" >
             <h2>Album liker</h2>
             <section class=" xl:h-[260px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
@@ -211,29 +102,7 @@ require 'Header.template.php';
         document.querySelector('.pop-up').classList.add('hidden')
     })
 
-    // let listMovPop = fetch('https://api.themoviedb.org/3/movie/movie_id=1?api_key=512f0783bae246658f714cd1abc41513&language=en-US')
-    // console.log("listMovPop")
-    // listMovPop.then(function (response) {
-    //     return response.json();
-    // }).then(function (data) {
-    //     console.log(data);
-    //     for (let i = 0; i < data.results.length; i++) {
-    //             let div = document.createElement('div')
-    //             div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-    //             document.querySelector('.mov_area').appendChild(div)
-    //         }
-
-    // });
 </script>
-<!-- const str = ',85124, 156984, 556';
-
-// Utiliser la méthode split() pour séparer la chaîne en un tableau en utilisant la virgule comme séparateur
-const arr = str.split(',');
-
-// Utiliser la méthode map() pour appliquer une fonction à chaque élément du tableau et renvoyer un nouveau tableau
-const numArr = arr.map(x => x.trim());
-
-console.log(numArr); // ['85124', '156984', '556'] -->
     <script src="script.js"></script>
 
 <?php
