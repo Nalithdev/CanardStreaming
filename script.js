@@ -12,6 +12,12 @@ function closeNav() {
     document.querySelector(".menu-overlay").classList.remove("menu-overlay-active");
 }
 
+
+function upheight(id){
+    document.getElementById(id).classList.toggle("xl:h-auto");
+
+
+}
 // The area bellow is for all the script getting data from the api and displaying the film on the web site
 
 
@@ -124,8 +130,6 @@ b.forEach((item) => {
         console.log('Actugenre item id (script body) : ' + ActuGenre)
     })
 })
-
-
 
 //get search_string
 document.querySelector('.search_bar').addEventListener('submit', (e) => {

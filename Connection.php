@@ -179,18 +179,20 @@ class Connection
     };
   }
 
-  public function GMovieS($u_id){
-      $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
-      $log->execute();
-      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-  }
+  // public function GMovieS($u_id){
+  //     $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
+  //     $log->execute();
+  //     return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+  // }
 
 
-  public function GMovieD($u_id){
-      $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '" LIMIT 4');
-      $log->execute();
-      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-  }
+
+/*
+    public function GMovieS($u_id){
+        $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
 
   public function GMovieSA($u_id){
       $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '"');
@@ -199,9 +201,93 @@ class Connection
   }
 
 
-  public function GMovieDA($u_id){
-      $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '"');
-      $log->execute();
-      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-  }
+    public function GMovieDA($u_id){
+        $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '"');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
+
+
+*/
+
+
+
+
+
+    public function selectWhereUserIdWithLimit($field, $table_name, $user_id, $limit)
+    {
+
+            $query = 'SELECT '. $field .' FROM ' . $table_name . ' WHERE user_id = ' . $user_id;
+        if($limit != 0){
+            $query = $query . ' LIMIT ' . $limit;
+        }
+        $statement = $this->pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function GMovieS($u_id)
+    {
+        return $this->selectWhereUserIdWithLimit('movie_id','movie_see', $u_id, 4);
+    }
+
+    public function GMovieD($u_id)
+    {
+        return $this->selectWhereUserIdWithLimit('movie_id','movie_wanted', $u_id, 4);
+    }
+
+    public function GMovieSA($u_id)
+    {
+        return $this->selectWhereUserIdWithLimit('movie_id','movie_see', $u_id, 0);
+    }
+
+
+    public function GMovieDA($u_id)
+    {
+        return $this->selectWhereUserIdWithLimit('movie_id', 'movie_wanted', $u_id, 0);
+
+    }
+
+    public function GAlbumid($u_id){
+        return $this->selectWhereUserIdWithLimit('album_id', 'album_by', $u_id, 0);
+    }
+
+    public function GAlbum($u_id){
+
+        $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '"');
+
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function GMovie($u_id){
+        $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 1');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function GAlbumLid($u_id){
+        return $this->selectWhereUserIdWithLimit('album_id', 'album_like', $u_id, 0);
+    }
+    public function GetMovie($u_id){
+        $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 4');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getuser($u_id){
+        $log = $this->pdo->prepare('SELECT * FROM user WHERE id = "' . $u_id . '"');
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+  /*  public function GAlbum($u_id , $private){
+        if ($private != ''){
+            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '"');
+        }else{
+            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '" AND private = '. $private.'');
+        }
+        $log->execute();
+        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+    }*/
 }
