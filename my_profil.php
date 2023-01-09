@@ -21,7 +21,7 @@ require 'Header.template.php';
         <?php
         echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
         echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
-        echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
+
         ?>
         <div>
             <button class="btform bg-slate-600"->Crée un album</button>

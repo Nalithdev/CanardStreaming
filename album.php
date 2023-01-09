@@ -25,7 +25,7 @@ print_r($name);
 
         $query = new Connection();
 
-        $lastsee = $query->GMovieDA($_SESSION['id']);
+        $lastsee = $query->GMovieSA($_SESSION['id']);
         echo '<script>  var listMovPop </script>';
         foreach ($lastsee as $movie) {
 
@@ -65,7 +65,7 @@ print_r($name);
 
         $query = new Connection();
 
-        $lastsee = $query->GMovieSA($_SESSION['id']);
+        $lastsee = $query->GMovieDA($_SESSION['id']);
         echo '<script>  var listMovPop </script>';
         foreach ($lastsee as $movie) {
 
