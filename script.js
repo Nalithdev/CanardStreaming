@@ -50,28 +50,17 @@ listMovFilter.then(function (response) {
 // var p = 1;
 // var ActuGenre = 0 ;
 
-//Axolote de l'utilisateur
-let SearchInputuser = document.querySelector('#searchuser');
-SearchInputuser.addEventListener('keyup', () => {
-    
-});
-
-
-
-
-
-
 
 
 //Axolote AKA the search bar with axios
 let SearchInput = document.querySelector('#search');
 SearchInput.addEventListener('keyup', () => {
-    //console.log(SearchInput.value);
+    console.log(SearchInput.value);
     if (SearchInput.value.length == 0) {
         //axios.get('https://api.themoviedb.org/3/movie/popular?api_key=512f0783bae246658f714cd1abc41513&language=en-US&page=1')
         axios.get('https://api.themoviedb.org/3/discover/movie?api_key=512f0783bae246658f714cd1abc41513&with_genres=28')
         .then(response => {
-        //console.log(response.data);
+        console.log(response.data);
         p = 1
         ActuGenre = 28
         document.querySelector('.mov_area').innerHTML = '';

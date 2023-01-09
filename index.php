@@ -13,24 +13,7 @@ require 'Header.template.php';
 
 ?>
 <main class="ml-[18%] pt-20 flex">
-    
-<div class="search">
-        <input type="text" id="search" placeholder="Search" >
-    </div>
 
-    <div>
-        <p>Order by</p>
-        <select class="MainFilter" name="orderby" id="orderby">
-            <option value="none">     </option>
-            <option value="popularity.desc">Popularity desc</option>
-            <option value="vote_average.desc">Vote average desc</option>
-            <option value="original_title.asc">Original title asc</option>
-            <option value="popularity.asc">Popularity asc</option>
-            <option value="vote_average.asc">Vote average asc</option>
-            <option value="original_title.desc">Original title desc</option>
-        </select>
-        <button class="ValidateFilter">Filter</button>
-    </div>
 
         <aside class=" fixed w-1/6 h-full bg-slate-900 text-white left-0 overflow-y-scroll ">
         <ul class="block">
@@ -57,6 +40,25 @@ require 'Header.template.php';
     </aside>
 
 <div class="block">
+    <div class="flex text-white">
+        <div class="text-black   search ">
+            <input type="text" id="search" placeholder="Search" >
+        </div>
+
+        <div>
+            <p>Order by</p>
+            <select class="MainFilter text-black" name="orderby" id="orderby">
+                <option value="none">Rien</option>
+                <option value="popularity.desc">Popularity desc</option>
+                <option value="vote_average.desc">Vote average desc</option>
+                <option value="original_title.asc">Original title asc</option>
+                <option value="popularity.asc">Popularity asc</option>
+                <option value="vote_average.asc">Vote average asc</option>
+                <option value="original_title.desc">Original title desc</option>
+            </select>
+            <button class="ValidateFilter">Filter</button>
+        </div>
+    </div>
         <section class="mov_area flex flex-wrap gap-[25px]">
         </section>
 
