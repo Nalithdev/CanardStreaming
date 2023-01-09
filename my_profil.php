@@ -15,7 +15,7 @@ require 'Header.template.php';
 ?>
 
     <div class="h-full block text-white w-full xl:flex">
-    <div class="w-full h-auto xl:w-1/4 xl:h-screen xl:fixed flex flex-col text-center p-[1.5rem] bg-slate-800 pt-20">
+    <div class="w-full h-auto  xl:w-1/4 xl:h-screen xl:fixed flex flex-col text-center p-[1.5rem] bg-slate-800 pt-20">
         <iconify-icon icon="iconoir:profile-circled" class="justify-center flex text-[150px]"></iconify-icon>
         <?php
         echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
@@ -53,7 +53,7 @@ require 'Header.template.php';
         </div>
         <div class="pb-4 overscroll-y-hidden items-center flex flex-col" >
             <h2>Album liker</h2>
-            <section class=" xl:h-[260px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
+            <section class=" xl:h-[26   0px] block xl:flex gap-5 wrap align-center  like_area  m-auto xl:m-0 " id="2">
             </section>
             <button onclick="upheight(1)">Voir plus D'album</button>
 
@@ -86,7 +86,7 @@ function getStr(mixed $movie, string $class): void
     }) . then(function (data) {
         console . log(data);
         let div = document . createElement('div')
-        div . innerHTML = `<div class=' w-[250px] p-6 flex flex-col items-center  m-auto xl:m-0 '><h2 class='text-[0.8rem]'>" . '${data.original_title}' . "</h2><img class='w-[100px] h-[150px]' src='https://image.tmdb.org/t/p/original" . '${data . poster_path}' . "'></div>
+        div . innerHTML = `<div class=' w-[250px] p-6 flex flex-col items-center  m-auto xl:m-0 '><h2 class='text-[0.8rem] lg:text-[1rem]'>" . '${data.original_title}' . "</h2><img class='xl:w-[100px] xl:h-[150px] w-[250px] h-350px]' src='https://image.tmdb.org/t/p/original" . '${data . poster_path}' . "'></div>
         `
         document . querySelector('" . $class . "') . appendChild(div)
         
@@ -139,7 +139,7 @@ getMovieD('.dream_area');
     }) . then(function (data) {
         console . log(data);
         let div = document . createElement('div')
-        div . innerHTML = `<a href='album.php?names=album&ids=".$id."'><div class=' w-[250px] p-6 flex flex-col items-center  m-auto xl:m-0 '><h2 class='text-[0.8rem]'>" . $name. "</h2><img class='w-[100px] h-[150px]' src='https://image.tmdb.org/t/p/original" . '${data . poster_path}' . "'></div></a>
+        div . innerHTML = `<a href='album.php?names=album&ids=".$id."'><div class=' w-[250px] p-6 flex flex-col items-center  m-auto xl:m-0 '><h2 class='text-[0.8rem] lg:text-[1rem]'>" . $name. "</h2><img class='xl:w-[100px] xl:h-[150px] w-[250px] h-350px]' src='https://image.tmdb.org/t/p/original" . '${data . poster_path}' . "'></div></a>
         `
         document . querySelector('". $class ."') . appendChild(div)
         

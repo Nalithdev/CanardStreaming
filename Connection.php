@@ -186,6 +186,7 @@ class Connection
     public function GMovie($u_id){
         $log = $this->pdo->prepare('SELECT movie_id FROM album_movie WHERE album_id = "' . $u_id . '" Limit 1');
         $log->execute();
+        print_r($log);
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
     public function GAlbumLid($u_id){
