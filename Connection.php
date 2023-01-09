@@ -140,31 +140,68 @@ class Connection
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
+  public function getalbumcontent($album_name)
+  {
+    $query = 'SELECT album_content
+    FROM album 
+    WHERE album_name = :album_name';
+    $statement = $this->pdo->prepare($query);
+    $statement->execute([
+      'album_name' => $album_name
+    ]);
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  public function addfilmtoalbum($album_name, $film_id){
+    $query = 'UPDATE album
+    SET album_content = CONCAT(album_content,  " " ,:film_id)
+    WHERE album_name = :album_name';
+    $statement = $this->pdo->prepare($query);
+    if ($statement->execute([
+      'album_name' => $album_name,
+      'film_id' => $film_id
+    ])) {
+      echo 'Données enregistrées avec succès !';
+    } else {
+      echo "Erreur lors de l'enregistrement des données";
+    };
+  }
+
+  public function getmovibyID($film_id){
+    $query = 'SE';
+    $statement = $this->pdo->prepare($query);
+    if ($statement->execute([
+    ])) {
+      echo 'Données enregistrées avec succès !';
+    } else {
+      echo "Erreur lors de l'enregistrement des données";
+    };
+  }
+
+  public function GMovieS($u_id){
+      $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
+      $log->execute();
+      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+  }
 
 
-    public function GMovieS($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
+  public function GMovieD($u_id){
+      $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '" LIMIT 4');
+      $log->execute();
+      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function GMovieSA($u_id){
+      $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '"');
+      $log->execute();
+      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+  }
 
 
-    public function GMovieD($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '" LIMIT 4');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function GMovieSA($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '"');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-
-    public function GMovieDA($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '"');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
+  public function GMovieDA($u_id){
+      $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '"');
+      $log->execute();
+      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

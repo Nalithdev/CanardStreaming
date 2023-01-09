@@ -14,30 +14,16 @@ require 'Header.template.php';
 
 ?>
 
-<<<<<<< HEAD
-<div class="profil_container text-white">
-    <!-- <div class=" user h-full flex flex-col text-center bg-slate-800">
-        <img class="w-2/5 m-auto mb-1 mt-0 " src="img/user_icon.webp">
-=======
     <div class="h-full block text-white w-full xl:flex">
     <div class=" w-full h-auto xl:w-1/4 xl:h-screen xl:fixed flex flex-col text-center p-[1.5rem] bg-slate-800 pt-20">
         <iconify-icon icon="iconoir:profile-circled" class="justify-center flex text-[150px]"></iconify-icon>
->>>>>>> ce4aef092879493eb750b021efde85dd3ffa25f8
         <?php
-        // echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
-        // echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
-        // echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
-        ?>
-    </div> -->
-    <div class="block w-[70%] ml-[30%]">
-    <?php
         echo '<h1>' . $_SESSION['user']['pseudo'] . ' ' . '</h1>';
         echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
         echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
         ?>
-<<<<<<< HEAD
-        <div class="h-1/2 flex flex-wrap">
-=======
+    </div> -->
+    <div class="block w-[70%] ml-[30%]">
     </div>
         <div class="block pt-20 xl:ml-[25%]">
 
@@ -129,20 +115,115 @@ foreach ($lastsee as $movie) {
         </div>
 
         <div class="pb-4 ">
->>>>>>> ce4aef092879493eb750b021efde85dd3ffa25f8
             <h2>Mes Albums</h2>
             <?php
+
             $connection = new connection();
             $Myalbums = $connection->getmyalbum();
             echo '<ul>';
+            echo '<script> var a = 0; var Myalbumcontent = 0;</script>';
             foreach($Myalbums as $Myalbum){
                 echo '<br>';
-                echo '<h3>' . $Myalbum['album_name'] . '</h3>';
+                echo '<h3 class=" ' . $Myalbum['album_name'] . ' ">' . $Myalbum['album_name'] . '</h3>';
+                $connection = new connection();
+                $Myalbumcontents = $connection->getalbumcontent($Myalbum['album_name']);
+                
+                foreach($Myalbumcontents as $Myalbumcontent){
+                    echo '<br>';
+                    echo '<h3>' . $Myalbumcontent['album_content'] . '</h3>';
+                    $a = $Myalbumcontent['album_content'];
+                    echo '<script> console.log("' . $a . '") 
+                    a = ' . $a . '
+                    </script>';
+                    ?><script> 
+                    console.log(a);
+                    Myalbumcontent = fetch('https://api.themoviedb.org/3/movie/' + a + '?api_key=512f0783bae246658f714cd1abc41513&language=en-US')
+                    Myalbumcontent.then(function (response) {
+                        return response.json();
+                        }).then(function (data) {
+                        console.log(data);
+                        // document.querySelector('.mov_area').innerHTML = '';
+                        // document.querySelector('.li_page_n').innerHTML = p ;
+                        // console.log('cas 3')
+                        // for (let i = 0; i < data.results.length; i++) {
+                        //     let div = document.createElement('div')
+                        //     div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+                        //     document.querySelector('.mov_area').appendChild(div)
+                        // }
+                    });
+                    </script>
+                    <?php
+                    echo '<br>'
+                    
+                    ?>
+                    <!-- <script>
+                        a = "' . $a . '";
+                    console.log(a);
+                    console.log(typeof a);
+                    
+                    console.log(String(a).chartAt(0));
+                    b= a.split(',');
+                    console.log(b);
+                    console.log(typeof b);
+                        c = b.charAt(0);
+                    console.log(c);
+                    if (b.charAt(0) = ",") {
+                        c = b.slice(1);
+                        console.log(c);
+                    };
+                        if ("' . $a . '".startsWith(',') ) {
+                        a = "' . $a . '".slice(1);
+                        console.log(a);
+                        console.log("prout");
+                    } else {
+                        console.log("prout2");
+                    };
+                        if ("' . $a . '".startsWith(',') ) {
+                        a = "' . $a . '".slice(1);
+                        b= a.split(',');
+                        c= a.map(x => x.trim());
+                        console.log(c);
+                        d= a.map(x => parseInt(x.trim()));
+                        console.log(d);
+                        console.log("prout");
+                    } else {
+                        b= "' . $a . '".split(',');
+                        c= a.map(x => x.trim());
+                        console.log(c);
+                        d= a.map(x => parseInt(x.trim()));
+                        console.log(d);
+                    };
+                        const str = $a ;
+
+                        // Utiliser la méthode split() pour séparer la chaîne en un tableau en utilisant la virgule comme séparateur
+                        const arr = str.split(',');
+
+                        // Utiliser la méthode map() pour appliquer une fonction à chaque élément du tableau et renvoyer un nouveau tableau
+                        const numArr = arr.map(x => x.trim());
+
+                        console.log(numArr); // ['85124', '156984', '556']
+                    </script> -->
+                    
+                    <?php
+                }
                 echo '<br>';
             }
             echo '</ul>';
             ?>
         </div>
+        <!-- <section class="album-pop-up hidden">
+            <div id="overlay"></div> -->
+        <!-- <section class="album-pop-up">
+            <?php
+            // $connection = new connection();
+            // $Myalbumcontents = $connection->getalbumcontent($Myalbum['album_name']);
+            // foreach($Myalbumcontents as $Myalbumcontent){
+            //     echo '<br>';
+            //     echo '<h3>' . $Myalbumcontent['album_content'] . '</h3>';
+            //     echo '<br>';
+            // }
+            ?>
+        </section> -->
         <div class="pb-4">
             <h2>Album liker</h2>
             <section class="flex flex-wrap gap-[25px]  wrap">
@@ -155,7 +236,6 @@ foreach ($lastsee as $movie) {
 
     </div>
 </div>
-<<<<<<< HEAD
 <section class="pop-up hidden">
     <div id="overlay"></div>
     <form method="POST" class="bg-white z-50 absolute top-96 left-96 w-52 h-48">
@@ -184,21 +264,31 @@ foreach ($lastsee as $movie) {
     CreeAlbum.addEventListener('click', function () {
         document.querySelector('.pop-up').classList.remove('hidden')
     })      
+    let overlay = document.querySelector('#overlay')
+    overlay.addEventListener('click', function () {
+        document.querySelector('.pop-up').classList.add('hidden')
+    })
 
+    // let listMovPop = fetch('https://api.themoviedb.org/3/movie/movie_id=1?api_key=512f0783bae246658f714cd1abc41513&language=en-US')
+    // console.log("listMovPop")
+    // listMovPop.then(function (response) {
+    //     return response.json();
+    // }).then(function (data) {
+    //     console.log(data);
+    //     for (let i = 0; i < data.results.length; i++) {
+    //             let div = document.createElement('div')
+    //             div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
+    //             document.querySelector('.mov_area').appendChild(div)
+    //         }
 
-    let listMovPop = fetch('https://api.themoviedb.org/3/movie/movie_id=1?api_key=512f0783bae246658f714cd1abc41513&language=en-US')
-    console.log("listMovPop")
-    listMovPop.then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        console.log(data);
-        for (let i = 0; i < data.results.length; i++) {
-                let div = document.createElement('div')
-                div.innerHTML = `<h2>${data.results[i].title}</h2><img src="https://image.tmdb.org/t/p/original${data.results[i].poster_path}"><p>${data.results[i].overview}</p>`
-                document.querySelector('.mov_area').appendChild(div)
-            }
-
-    });
+    // });
 </script>
-=======
->>>>>>> ce4aef092879493eb750b021efde85dd3ffa25f8
+<!-- const str = ',85124, 156984, 556';
+
+// Utiliser la méthode split() pour séparer la chaîne en un tableau en utilisant la virgule comme séparateur
+const arr = str.split(',');
+
+// Utiliser la méthode map() pour appliquer une fonction à chaque élément du tableau et renvoyer un nouveau tableau
+const numArr = arr.map(x => x.trim());
+
+console.log(numArr); // ['85124', '156984', '556'] -->
