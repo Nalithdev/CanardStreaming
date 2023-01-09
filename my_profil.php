@@ -23,10 +23,35 @@ require 'Header.template.php';
         echo '<h3>' . $_SESSION['user']['email'] . ' ' . '</h3>';
         echo '<h3>' . $_SESSION['user']['id'] . ' ' . '</h3>';
         ?>
-    </div> -->
+    </div> 
     <div class="block w-[70%]'">
     </div>
         <div class="block pt-20 xl:ml-[25%]">
+
+        <div class="pb-[20px] items-center flex flex-col w-full ">
+            <form method="GET">
+                <label for="searchuser">Find a Friend :</label>
+                <input class="text-black" type="text" id="searchuser" placeholder="Search a user" name="user" >
+
+                <input type="submit" value="Look for" name="search">
+            </form>
+            <?php
+            if ($_GET){
+                $connection = new Connection();
+                $results = $connection->searchuser($_GET['user']);
+                if($results){
+                    echo '<h2>Resultat de la recherche : </h2>';
+                    foreach($results as $user){
+                        echo '<a href="profil.php?id='. $user['id'] .'">'. $user['pseudo'] .'</a>';
+                    }
+                }else{
+                    echo '<h2>Resultat de la recherche : </h2>';
+                    echo '<h3> Aucun resultat </h3>';
+                }
+            };
+            ?>
+        </div>
+        
 
         <div class="pb-[20px] items-center flex flex-col w-full ">
             <h2>Dernier Visionnage</h2>

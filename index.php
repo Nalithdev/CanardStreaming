@@ -13,8 +13,8 @@ require 'Header.template.php';
 
 ?>
 <main class="ml-[18%] pt-20 flex">
-
-    <div class="search">
+    
+<div class="search">
         <input type="text" id="search" placeholder="Search" >
     </div>
 

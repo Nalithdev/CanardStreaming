@@ -50,6 +50,19 @@ listMovFilter.then(function (response) {
 // var p = 1;
 // var ActuGenre = 0 ;
 
+//Axolote de l'utilisateur
+let SearchInputuser = document.querySelector('#searchuser');
+SearchInputuser.addEventListener('keyup', () => {
+    
+});
+
+
+
+
+
+
+
+
 //Axolote AKA the search bar with axios
 let SearchInput = document.querySelector('#search');
 SearchInput.addEventListener('keyup', () => {

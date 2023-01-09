@@ -133,7 +133,8 @@ class Connection
     WHERE album_id = :album_id';
     $statement = $this->pdo->prepare($query);
     $statement->execute([
-      'album_id' => $_SESSION['user']['id']
+      'album_id
+      ' => $_SESSION['user']['id']
     ]);
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -176,43 +177,6 @@ class Connection
       echo "Erreur lors de l'enregistrement des données";
     };
   }
-
-  // public function GMovieS($u_id){
-  //     $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
-  //     $log->execute();
-  //     return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-  // }
-
-
-
-/*
-    public function GMovieS($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '" LIMIT 4');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-  public function GMovieSA($u_id){
-      $log = $this->pdo->prepare('SELECT movie_id FROM movie_see WHERE user_id = "' . $u_id . '"');
-      $log->execute();
-      return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-  }
-
-
-    public function GMovieDA($u_id){
-        $log = $this->pdo->prepare('SELECT movie_id FROM movie_wanted WHERE user_id = "' . $u_id . '"');
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }
-}
-
-
-
-*/
-
-
-
-
 
     public function selectWhereUserIdWithLimit($field, $table_name, $user_id, $limit)
     {
@@ -279,13 +243,12 @@ class Connection
         return $result = $log->fetchAll(PDO::FETCH_ASSOC);
     }
 
-  /*  public function GAlbum($u_id , $private){
-        if ($private != ''){
-            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '"');
-        }else{
-            $log = $this->pdo->prepare('SELECT * FROM album WHERE album_id = "' . $u_id . '" AND private = '. $private.'');
-        }
-        $log->execute();
-        return $result = $log->fetchAll(PDO::FETCH_ASSOC);
-    }*/
+    public function searchuser($searchuser){
+      $query = "SELECT * FROM user WHERE pseudo LIKE '%". $searchuser ."%' ";
+      $statement = $this->pdo->prepare($query);
+      $statement->execute();
+      //var_dump($statement);
+      return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
