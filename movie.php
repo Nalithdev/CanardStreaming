@@ -7,7 +7,7 @@ session_start();
 if (!isset($_SESSION['user']) || $_SESSION['user'] === ''){
     header('Location: login.php');
 }
-$_GET['ids'] = 555604 ;
+
 require 'doctype.template.php';
 require 'Header.template.php';
 
@@ -31,12 +31,12 @@ console.log(film) </script>"
                     <h2>A quel album ajouter le film : </h2>
                 <form method="POST" >
                 <?php
-                        $connection = new connection();
+                        $connection = new Connection();
                         $Myalbums = $connection->getmyalbum();
                         foreach($Myalbums as $Myalbum){
                             echo '<br>';
                             echo '<label for="'. $Myalbum['album_name'] .'"> Ajouter a '. $Myalbum['album_name'] .'</label>';
-                            echo '<input type="checkbox" id="'. $Myalbum['album_name'] .'" name="checkbox[]" value="'. $Myalbum['album_name'] .'">';
+                            echo '<input type="checkbox" id="'. $Myalbum['album_name'] .'" name="checkbox[]" value="'. $Myalbum['album_id'] .'">';
                             
                         }
                     ?>
