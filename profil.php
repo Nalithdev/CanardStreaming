@@ -65,7 +65,7 @@ $id_user = $_GET['id'];
 
     </div>
 </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 
 <?php
 
@@ -165,8 +165,10 @@ function getAlbum(string $class): void
         $album = $query->GAlbum($albumid['album_id']);
         foreach ($album as $Amovie) {
             $movie = $query->GMovie($Amovie['album_id'],0);
+            if( $Amovie['private'] == 0){
             foreach ($movie as $mov) {
                 Writealbum($mov, $class , $Amovie['album_id'] , $Amovie['album_name']);
+            }
             }
         }
     }
