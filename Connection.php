@@ -243,6 +243,31 @@ class Connection
         'user_id' => $user_id
       ]);
     }
+    public function GidAdmin($album_id)
+    {
 
+        $query = 'SELECT user_id FROM album_by WHERE album_id = :album_id';
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([
+            'album_id' => $album_id
+        ]);
+        $result = $statement->fetchColumn();
+        return $result;
+    }
+    /*
+     * @return PDO
+     */
+
+    public function film_del($album_id , $movie_id){
+
+      $query = 'DELETE FROM album_movie WHERE album_id = :album_id AND movie_id = :movie_id';
+      $statement = $this->pdo->prepare($query);
+      $statement->execute([
+        'album_id' => $album_id,
+          'movie_id' => $movie_id
+      ]);
+
+
+    }
     
 }
