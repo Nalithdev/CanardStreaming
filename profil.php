@@ -49,7 +49,7 @@ $id_user = $_GET['id'];
         </div>
 
         <div class="pb-4  overscroll-y-hidden items-center flex flex-col" >
-            <h2>Mes Albums</h2>
+            <h2>Ces Albums</h2>
             <section class=" xl:h-[280px] block xl:flex gap-5 wrap align-center  album_area  m-auto xl:m-0 " id="1">
 
             </section>
