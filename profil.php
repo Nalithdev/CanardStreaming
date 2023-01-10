@@ -22,7 +22,7 @@ $id_user = $_GET['id'];
         $user = $query->getuser($id_user);
         foreach ($user as $user) {
             echo '<h1>' . $user['pseudo'] . ' ' . '</h1>';
-            echo '<h3>' . $user['email'] . ' ' . '</h3>';
+            //echo '<h3>' . $user['email'] . ' ' . '</h3>';
         }
         ?>
     </div>
