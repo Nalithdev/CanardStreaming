@@ -102,12 +102,16 @@ print_r($name);
     if ($name == 'album'){
         echo'<div class="flex flex-row gap-x-8"> 
         <h2>Film à voir</h2> 
-        <form method="POST"> 
+        <form method="POST" action="addinlike.php"> 
+        <input type="hidden" name="album_id" value="'.$_GET['ids'].'">
         <input type="submit" id="btnlike" class="bg-slate-700  p-2 rounded-full" value="❤️ Add like ">
         </form> 
         </div>
-        <br>
+
+        
     <section class=" block xl:flex gap-[25px] items-center m-auto  xl:-m-0 flex-wrap mov_areas">';
+
+
 
         $query = new Connection();
 
@@ -144,29 +148,5 @@ print_r($name);
     
     echo'</section>';
         ?>
-    <?php 
-        if($_POST){
-            $connection = new connection();
-            $connection->likealbum($_GET['ids'], $_SESSION['id']);
-            var_dump($_GET['ids']);
-        }
-        // if ($_GET['ids'] = 4){
-        //     var_dump($_GET['ids']);
-        // };
-        ?>
+
 </main>
-<!-- <script>
-    let btnLike = document.querySelector('#btnlike')
-    btnLike.addEventListener('click', () => {
-        console.log('click')
-        <?php 
-        // if($_POST){
-        //     $connection = new connection();
-        //     $connection->likealbum($_GET['ids'], $_SESSION['id']);
-        // }
-        // if ($_GET['ids'] = 4){
-        //     var_dump($_GET['ids']);
-        // };
-        ?>
-    });
-</script> -->
