@@ -10,8 +10,12 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] === ''){
 require 'doctype.template.php';
 require 'Header.template.php';
 
-echo "<script> var film = " .$_GET['ids'] . " 
-console.log(film) </script>"
+echo "<script> let film = " .$_GET['ids'] . " 
+</script>";
+
+if($_POST){
+    header("refresh:0");
+}
 ?>
 <main class="pt-20">
 <div class="h-1/2 p-12">
@@ -20,8 +24,41 @@ console.log(film) </script>"
 
 
         <div class="flex flex-col justify-around items-center  w-11/12">
-
             <?php
+            //liste souhait
+            $query = new Connection();
+            $result = $query -> SfD($_GET['ids'] , $_SESSION['id']);
+            if($result){
+                echo'
+                <form method="POST">
+                <input type="hidden" value="' .$_GET['ids'].'" name="id">
+                <input type="submit" value="supprimé de la liste de souhait" name="Ddream" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full" >
+            </form>';
+            }
+            else{
+                echo'<form method="POST">
+                <input type="hidden" value= "' .$_GET['ids'].'" name="id">
+                <input type="submit" value="Mettre dans la liste de souhait" name="dream" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full" >
+            </form>';
+            }
+            //liste vue
+            $query = new Connection();
+            $result = $query -> SfS($_GET['ids'] , $_SESSION['id']);
+            if($result){
+                echo'<form method="POST">
+                <input type="hidden" value="' .$_GET['ids'].' " name="id">
+                <input type="submit" value="film pas vu" name="Dseen" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full">
+            </form>';
+
+            }
+            else{
+                echo'<form method="POST">
+                <input type="hidden" value="' .$_GET['ids'].'" name="id">
+              <input type="submit" value="film vue" name="seen" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full">
+            </form>';
+
+            }
+
             echo'<p class="addalbum bg-slate-700 p-2 pl-4 pr-4 rounded-full">Ajouter à un album </p>';
             ?>
             <section class="pop-up hidden">
@@ -31,16 +68,12 @@ console.log(film) </script>"
                 <form method="POST" >
                 <?php
                $connection = new connection();
-
                                   $Myalbums = $connection->getmyalbum();
-
                                   foreach($Myalbums as $Myalbum){
                                       echo '<br>';
                                       echo '<label for="'. $Myalbum['album_id'] .'"> Ajouter a '. $Myalbum['album_name'] .'</label>';
                                       echo '<input type="checkbox" id="'. $Myalbum['album_id'] .'" name="checkbox[]" value="'. $Myalbum['album_id'] .'">';
-
                                   }
-
                                    ?>
 
 
@@ -48,48 +81,7 @@ console.log(film) </script>"
                     <input class=" bg-slate-700 p-2 pl-4 pr-4 rounded-full" type="submit" value="Ajouter">
                 </form>
             </section>
-            <?php 
-                $checkboxes = isset($_POST['checkbox']) ? $_POST['checkbox'] : array();
-                foreach ($checkboxes as $checkbox) {
-                    // Traitement des valeurs cochées
-                    $connection = new connection();
-                    $connection->addfilmtoalbum($checkbox, $_GET['ids']);
-                }
-                    ?>
-    <?php
-            //liste souhait
-            $query = new Connection();
-            $result = $query -> SfD($_GET['ids'] , $_SESSION['id']);
-            if($result){
-                echo'
-                <form method="POST" action="">
-                <input type="hidden" value="' .$_GET['ids'].'" name="id">
-                <input type="submit" value="supprimé de la liste de souhait" name="Ddream" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full" >
-            </form>';
-            }
-            else{
-                echo'<form method="POST" action="">
-                <input type="hidden" value= "' .$_GET['ids'].'" name="id">
-                <input type="submit" value="Mettre dans la liste de souhait" name="dream" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full" >
-            </form>';
-            }
-            //liste vue
-            $query = new Connection();
-            $result = $query -> SfS($_GET['ids'] , $_SESSION['id']);
-            if($result){
-                echo'<form method="POST" action="">
-                <input type="hidden" value="' .$_GET['ids'].' " name="id">
-                <input type="submit" value="film pas vu" name="Dseen" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full">
-            </form>';
 
-            }
-            else{
-                echo'<form method="POST" action="">
-                <input type="hidden" value="' .$_GET['ids'].'" name="id">
-               <input type="submit" value="film vue" name="seen" class="bg-slate-700 p-2 pl-4 pr-4 rounded-full">
-            </form>';
-            }
-            ?>
         </div>
     </section>
     <section class="film_areas flex flex-wrap gap-[25px] text-white"> </section>
@@ -148,7 +140,7 @@ if ($_POST){
         $id = $_POST['id'];
         $connection = new Connection();
         $connection -> Newdream($id , $_SESSION['id']);
-        header("Location: movie.php?ids=$id");
+        //header("Location: movie.php?ids=$id");
 
     }
 
@@ -156,7 +148,7 @@ if ($_POST){
         $id = $_POST['id'];
         $connection = new Connection();
         $connection -> Dview($id , $_SESSION['id']);
-        header("refresh:1");
+
 
     }
 
@@ -164,8 +156,17 @@ if ($_POST){
         $id = $_POST['id'];
         $connection = new Connection();
         $connection -> dreamD($id , $_SESSION['id']);
-        header("refresh:1");
+        //header("refresh:1");
 
     }
+
+    $checkboxes = isset($_POST['checkbox']) ? $_POST['checkbox'] : array();
+    foreach ($checkboxes as $checkbox) {
+        // Traitement des valeurs cochées
+        $connection = new connection();
+        $connection->addfilmtoalbum($checkbox, $_GET['ids']);
+    }
+
+
 }
 ?>
