@@ -107,6 +107,7 @@ print_r($name);
         <input type="submit" id="btnlike" class="bg-slate-700  p-2 rounded-full" value="❤️ Add like ">
         </form> 
         </div>
+        <br>
 
         
     <section class=" block xl:flex gap-[25px] items-center m-auto pt-10  xl:-m-0 flex-wrap mov_areas">';
