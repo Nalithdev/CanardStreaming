@@ -234,5 +234,15 @@ class Connection
       //var_dump($statement);
       return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function likealbum($album_id, $user_id){
+      $query = 'INSERT INTO album_like (album_id, user_id) VALUES (:album_id, :user_id)';
+      $statement = $this->pdo->prepare($query);
+      $statement->execute([
+        'album_id' => $album_id,
+        'user_id' => $user_id
+      ]);
+    }
+
     
 }
